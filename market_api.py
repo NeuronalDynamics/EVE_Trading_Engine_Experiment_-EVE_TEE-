@@ -7,10 +7,18 @@ from typing import List, Dict, Any
 ESI_BASE_URL = "https://esi.evetech.net/latest"
 DATASOURCE = "tranquility"
 
-# Inferno Heavy Missile and Sinq Laison
+# Inferno Heavy Missile
 INFERNO_HEAVY_MISSILE_TYPE_ID = 208      # type_id for Inferno Heavy Missile
-SINQ_LAISON_REGION_ID = 10000032         # region_id for Sinq Laison
 
+# Region
+SINQ_LAISON_REGION_ID = 10000032         # region_id for Sinq Laison
+THE_FORGE_REGION_ID = 10000002           # region_id for Forge
+
+# System
+JITA_SYSTEM_ID = 30000142             # solar system Jita
+
+# Station
+JITA_44_STATION_ID = 60003760         # Jita IV - Moon 4 - Caldari Navy Assembly Plant
 
 class EveMarketAPI:
     def __init__(

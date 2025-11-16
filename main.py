@@ -215,7 +215,7 @@ from typing import Dict, Any, List
 
 import matplotlib.pyplot as plt
 
-from market_api import EveMarketAPI, SINQ_LAISON_REGION_ID
+from market_api import EveMarketAPI, THE_FORGE_REGION_ID
 
 # ESI base info (must match what you use in market_api.py)
 ESI_BASE_URL = "https://esi.evetech.net/latest"
@@ -467,10 +467,10 @@ def plot_history_from_csv(csv_filename: str, png_filename: str) -> None:
 
 def main():
     api = EveMarketAPI(
-        user_agent="all-missiles-sinq-tool/1.0 (you@example.com)"
+        user_agent="all-missiles-the-forge-tool/1.0 (you@example.com)"#"all-missiles-sinq-tool/1.0 (you@example.com)"
     )
 
-    region_id = SINQ_LAISON_REGION_ID  # your “regime”
+    region_id = THE_FORGE_REGION_ID#SINQ_LAISON_REGION_ID  # “regime”
 
     print("Discovering type IDs traded in region...")
     region_type_ids = get_region_type_ids(api, region_id)
@@ -508,6 +508,11 @@ def main():
             for row in full_hist
             if datetime.fromisoformat(row["date"]).date() >= cutoff
         ]
+
+        if not hist_6m:
+            print("  - no history in last 6 months; skipping CSV/plot for this missile")
+            continue  # go to next missile
+
         hist_csv = os.path.join("output", f"history_{type_id}_{slug}_6m.csv")
         export_history_to_csv(hist_6m, hist_csv)
 
