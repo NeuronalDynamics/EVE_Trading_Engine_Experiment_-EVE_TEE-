@@ -1,0 +1,4 @@
+side,price,volume_remain,volume_total,system_id,location_id,duration,issued,order_id,min_volume,range
+buy,2250000.0,1,1,30000142,60003760,90,2025-11-15T21:55:24Z,7118062977,1,region
+buy,2241000.0,1,1,30000142,60003760,90,2025-11-11T19:45:10Z,6944865599,1,station
+buy,2150000.0,2,2,30000142,60003760,90,2025-09-05T01:24:25Z,7135403766,1,region

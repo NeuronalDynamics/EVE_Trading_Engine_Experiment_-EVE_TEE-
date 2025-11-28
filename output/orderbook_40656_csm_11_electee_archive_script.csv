@@ -1,0 +1,4 @@
+side,price,volume_remain,volume_total,system_id,location_id,duration,issued,order_id,min_volume,range
+buy,8500000.0,1,1,30000142,60003760,90,2025-10-31T18:11:04Z,7172475149,1,station
+buy,7500000.0,1,1,30000142,60003760,90,2025-10-31T16:06:35Z,7174925033,1,station
+buy,3500000.0,1,1,30000142,60003760,30,2025-10-28T02:01:24Z,7139561134,1,solarsystem

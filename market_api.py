@@ -90,7 +90,7 @@ class EveMarketAPI:
         return {"buy": buy_orders, "sell": sell_orders}
 
     # -------- region price history --------
-
+    '''
     def get_region_history(
         self,
         region_id: int,
@@ -103,6 +103,31 @@ class EveMarketAPI:
             f"/markets/{region_id}/history/",
             type_id=type_id,
         )
+        return resp.json()
+    '''
+    def get_region_history(
+        self,
+        region_id: int,
+        type_id: int,
+    ):
+        """
+        Get daily price/volume history for a type in a region.
+
+        Returns [] if ESI says 404 (no history for this type/region).
+        """
+        try:
+            # Adjust to your _get signature; this version matches the one you showed
+            resp = self._get(
+                f"/markets/{region_id}/history/",
+                type_id=type_id,
+            )
+        except requests.exceptions.HTTPError as exc:
+            # ESI docs: 404 = type not found / no history for that type in region :contentReference[oaicite:1]{index=1}
+            if exc.response is not None and exc.response.status_code == 404:
+                return []
+            # anything else (500, 420, etc.) still bubbles up
+            raise
+
         return resp.json()
 
     def get_region_history_last_days(

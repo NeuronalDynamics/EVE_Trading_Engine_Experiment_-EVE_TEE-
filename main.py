@@ -439,7 +439,7 @@ def plot_history_from_csv(csv_filename: str, png_filename: str) -> None:
     ax_price.plot(dates, lows, label="Low", linestyle="--", linewidth=1)
     ax_price.set_xlabel("Date")
     ax_price.set_ylabel("Price (ISK)")
-    ax_price.set_title("Missile – Sinq Laison – last ~6 months")
+    ax_price.set_title("Missile – last ~6 months")
     ax_price.grid(True, which="both", linestyle="--", alpha=0.3)
 
     # Volume on secondary axis, log scale (so big spikes are visible)
@@ -476,6 +476,7 @@ def main():
     region_type_ids = get_region_type_ids(api, region_id)
     print(f"Total types with orders in region: {len(region_type_ids)}")
 
+    '''
     # Filter down to missiles
     missile_ids: List[int] = []
     for tid in region_type_ids:
@@ -485,11 +486,12 @@ def main():
     print(f"Missile types with orders in region: {len(missile_ids)}")
     if not missile_ids:
         return
+    '''
 
     os.makedirs("output", exist_ok=True)
     cutoff = datetime.utcnow().date() - timedelta(days=180)  # ~6 months
 
-    for type_id in missile_ids:
+    for type_id in region_type_ids:#missile_ids:
         type_info = get_type_info(api, type_id)
         type_name = type_info["name"]
         slug = slugify(type_name)
@@ -510,7 +512,7 @@ def main():
         ]
 
         if not hist_6m:
-            print("  - no history in last 6 months; skipping CSV/plot for this missile")
+            print("  - no history in last 6 months; skipping CSV/plot for this")
             continue  # go to next missile
 
         hist_csv = os.path.join("output", f"history_{type_id}_{slug}_6m.csv")
